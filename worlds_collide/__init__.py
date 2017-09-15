@@ -3,6 +3,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 
 app = Flask(__name__)
 app.config.from_object('worlds_collide.default_settings')
+app.config.from_envvar('WORLDS_COLLIDE_SETTINGS')
 
 @app.route('/')
 def main():
