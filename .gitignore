@@ -1,3 +1,4 @@
 env
 __pycache__
 worlds_collide/settings.cfg
+cassandra_data
