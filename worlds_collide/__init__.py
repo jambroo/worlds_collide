@@ -1,6 +1,8 @@
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
+from .models.trip import Trip
+
 app = Flask(__name__)
 app.config.from_object('worlds_collide.default_settings')
 app.config.from_envvar('WORLDS_COLLIDE_SETTINGS')
