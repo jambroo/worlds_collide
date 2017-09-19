@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "http-server": "^0.10.0",
+    "react-fontawesome": "^1.6.1",
+    "react-hot-loader": "^1.3.1",
+    "webpack": "^3.6.0"
+  },
+  "scripts": {
+    "babel_bk": "babel --presets es2015 index.js -o build/index.bundle.js",
+    "babel": "babel index.jsx -o build/index.bundle.js",
+    "start": "http-server"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "html-webpack-plugin": "^2.30.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "webpack-dev-server": "^2.8.2"
+  }
+}
