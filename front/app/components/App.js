@@ -1,12 +1,13 @@
 import React from 'react'
-import City from './City'
+import VisibleTripList from '../containers/VisibleTripList'
+import AddDestination from '../containers/AddDestination'
 
 import './App.scss'
 
 const App = () => (
   <div className="App">
-    <City label="From" />
-    <City label="To" />
+    <VisibleTripList />
+    <AddDestination />
   </div>
 )
 
