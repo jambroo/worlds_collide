@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import './City.scss'
+
 const City = ({label}) => (
-  <div>
+  <div className="City">
     <input type="text" placeholder={label} />
   </div>
 )

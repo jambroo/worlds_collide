@@ -3,6 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     devtool: 'eval-source-map',
@@ -19,6 +20,7 @@ module.exports = {
         publicPath: '/'
     },
     plugins: [
+        new ExtractTextPlugin("styles.css"),
         new HtmlWebpackPlugin({
           template: 'app/index.tpl.html',
           inject: 'body',
@@ -43,8 +45,20 @@ module.exports = {
                 loader: 'json'
             },
             {
-                test: /\.scss$/,
-                loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]!sass'
+                test: /\.(css|scss)$/,
+                use: [
+                  'style-loader',
+                  'css-loader?importLoaders=1',
+                  {
+                    loader: 'postcss-loader',
+                    options: {
+                      config: {
+                        path: path.resolve(__dirname, 'postcss.config.js'),
+                      },
+                    },
+                  },
+                  'sass-loader'
+                ]
             },
             { test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
             { test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, loader: 'file' }
