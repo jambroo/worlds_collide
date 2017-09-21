@@ -3,6 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
@@ -11,7 +12,6 @@ module.exports = {
         'babel-polyfill',
         'webpack-dev-server/client?http://localhost:3000',
         'webpack/hot/only-dev-server',
-        // 'react-hot-loader/patch',
         path.join(__dirname, 'app/index.jsx')
     ],
     output: {
@@ -21,6 +21,9 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin("styles.css"),
+        new CopyWebpackPlugin([
+            { from: 'app/assets' }
+        ]),
         new HtmlWebpackPlugin({
           template: 'app/index.tpl.html',
           inject: 'body',
@@ -61,7 +64,7 @@ module.exports = {
                 ]
             },
             { test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-            { test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, loader: 'file' }
+            { test: /\.(ttf|eot|svg|png|ico)(\?[a-z0-9#=&.]+)?$/, loader: 'file' }
         ]
     }
 };
