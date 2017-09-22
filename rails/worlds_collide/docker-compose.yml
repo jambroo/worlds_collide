@@ -2,6 +2,14 @@ version: '3'
 services:
   db:
     image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../pg_data:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_DB=worlds_collide
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -9,5 +17,8 @@ services:
       - .:/usr/src/app
     ports:
       - "3000:3000"
+    environment:
+      - PG_USER=${PG_USER}
+      - PG_PASS=${PG_PASS}
     depends_on:
       - db

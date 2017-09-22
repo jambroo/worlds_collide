@@ -10,10 +10,12 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
   adapter: postgresql
+  host: 172.17.0.1
+  timeout: 5000
+  username: <%= ENV["PG_USER"] %>
+  password: <%= ENV["PG_PASS"] %>
   database: worlds_collide
-  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
