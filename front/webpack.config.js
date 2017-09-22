@@ -10,7 +10,7 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: [
         'babel-polyfill',
-        'webpack-dev-server/client?http://localhost:3000',
+        'webpack-dev-server/client?http://localhost:3001',
         'webpack/hot/only-dev-server',
         path.join(__dirname, 'app/index.jsx')
     ],
