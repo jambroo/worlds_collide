@@ -8,6 +8,3 @@ COPY Gemfile.lock /usr/src/app/
 RUN bundle install
 
 COPY . /usr/src/app
-
-#CMD ["ruby", "./start.rb"]
-CMD ["cat", "/usr/src/app/Gemfile.lock"]
