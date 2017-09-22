@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { VisibilityFilters, ADD_TRIP, SET_VISIBILITY_FILTER } from '../actions/'
+import { VisibilityFilters, ADD_TRIP, SET_VISIBILITY_FILTER, LOAD_TRIPS } from '../actions/'
 const { SHOW_ALL } = VisibilityFilters
 
 const trips = (state = [], action) => {
@@ -13,6 +13,8 @@ const trips = (state = [], action) => {
           dest: action.dest
         }
       ]
+    case LOAD_TRIPS:
+      return action.trips
     default:
       return state
   }
