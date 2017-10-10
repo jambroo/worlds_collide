@@ -5,7 +5,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ../pg_data:/var/lib/postgresql
+      - /home/james/dev/py/worlds_collide/rails/worlds_collide/pg_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${PG_USER}
       - POSTGRES_PASSWORD=${PG_PASS}

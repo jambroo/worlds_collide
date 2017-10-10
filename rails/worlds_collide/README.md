@@ -1,24 +1,19 @@
-# README
+# World's Collide
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Build
 
-Things you may want to cover:
+## Booting postgres and worlds_collide backend
+```
+PG_USER="user" PG_PASS="pass" docker-compose up
+```
 
-* Ruby version
+## Connecting to postgres
+```
+docker exec -it <postgres_container_id> psql -U user -W worlds_collide
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Troubleshooting
+To ensure you have no legacy postgres running you can use the following:
+```
+docker-compose rm postgres
+```
