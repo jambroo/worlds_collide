@@ -2,23 +2,23 @@
 
 ## Build
 
-## Booting postgres and worlds_collide backend
+### Booting postgres and worlds_collide backend
 ```
 PG_USER="user" PG_PASS="pass" docker-compose up
 ```
 
-## Connecting to postgres
+### Connecting to postgres
 ```
 docker exec -it <postgres_container_id> psql -U user -W worlds_collide
 ```
 
-## Troubleshooting
-To ensure you have no legacy postgres running you can use the following:
+### Troubleshooting
+To ensure you have no legacy containers you can use the following:
 ```
-docker-compose rm postgres
+docker-compose down
 ```
 
-## Run migrations
+### Run migrations
 
 ```
 docker exec -it <rails_container_id> bin/rails db:migrate RAILS_ENV=development
