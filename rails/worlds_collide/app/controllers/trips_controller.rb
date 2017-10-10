@@ -14,6 +14,14 @@ class TripsController < ApplicationController
     render json: @trips
   end
 
+  def connected
+    params.require(:dest)
+    dest = params[:dest]
+
+    # Unsafe
+    render json: {response: Trip.where(dest: dest)}
+  end
+
   def trip_params
     params.require(:trip).permit(:src, :dest)
   end
