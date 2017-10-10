@@ -18,10 +18,21 @@ To ensure you have no legacy containers you can use the following:
 docker-compose down
 ```
 
+If the rails container abruptly ends you  may need to remove this pid file
+```
+sudo rm -f tmp/pids/server.pid
+```
+
 ### Run migrations
 
 ```
 docker exec -it <rails_container_id> bin/rails db:migrate RAILS_ENV=development
+```
+
+## Run unittests
+To run the unittests use the the following
+```
+sudo docker exec -it <rails_container_id> bin/rails test
 ```
 
 ## cURL examples
