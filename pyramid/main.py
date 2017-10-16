@@ -12,7 +12,7 @@ def trips_list(request):
     trips = []
     for trip in DBSession.query(Trip).all():
         trips.append(trip.to_dict())
-    return Response(str(trips))
+    return {"trips": trips}
 
 def trips_add(request):
     if "src" not in request.json_body.keys() or \
@@ -23,7 +23,7 @@ def trips_add(request):
     result = DBSession.add(trip)
     DBSession.commit()
 
-    return Response(str(trip))
+    return {"result": 0, "trip": trip.to_dict()}
 
 if __name__ == '__main__':
     engine = create_engine('postgresql+psycopg2://'+os.environ['PG_USER']+':'+os.environ['PG_PASS']+'@'+os.environ['PG_HOST']+'/worlds_collide')
@@ -34,8 +34,8 @@ if __name__ == '__main__':
     with Configurator() as config:
         config.add_route('trips_list', '/')
         config.add_route('trips_add', '/add')
-        config.add_view(trips_list, route_name='trips_list')
-        config.add_view(trips_add, route_name='trips_add')
+        config.add_view(trips_list, route_name='trips_list', renderer='json')
+        config.add_view(trips_add, route_name='trips_add', renderer='json')
         app = config.make_wsgi_app()
     server = make_server('0.0.0.0', 6543, app)
     server.serve_forever()
