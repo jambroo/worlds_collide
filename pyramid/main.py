@@ -11,7 +11,7 @@ from worldscollide.models import DBSession, Trip, Base
 def trips_list(request):
     trips = []
     for trip in DBSession.query(Trip).all():
-        trips.append({"src": trip.src, "dest": trip.dest})
+        trips.append(trip.to_dict())
     return Response(str(trips))
 
 def trips_add(request):
@@ -21,12 +21,13 @@ def trips_add(request):
 
     trip = Trip(src=request.json_body["src"], dest=request.json_body["dest"])
     result = DBSession.add(trip)
+    DBSession.commit()
 
-    return Response(result)
+    return Response(str(trip))
 
 if __name__ == '__main__':
     engine = create_engine('postgresql+psycopg2://'+os.environ['PG_USER']+':'+os.environ['PG_PASS']+'@'+os.environ['PG_HOST']+'/worlds_collide')
-    DBSession.configure(bind=engine, autocommit=True)
+    DBSession.configure(bind=engine)
     Base.metadata.bind = engine
     Base.metadata.create_all(engine)
 

@@ -22,6 +22,16 @@ class Trip(Base):
     src = Column(String(100))
     dest = Column(String(100))
 
+    def to_dict(self):
+        return {
+            "uid": self.uid,
+            "src": self.src,
+            "dest": self.dest
+        }
+
+    def __str__(self):
+        return str(self.to_dict())
+
 
 class Root(object):
     __acl__ = [(Allow, Everyone, 'edit')]
