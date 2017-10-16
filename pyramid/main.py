@@ -6,7 +6,7 @@ import psycopg2
 import os
 from sqlalchemy import create_engine
 
-from worldscollide.models import DBSession, Trip, Base
+from models import DBSession, Trip, Base
 
 def trips_list(request):
     trips = []
