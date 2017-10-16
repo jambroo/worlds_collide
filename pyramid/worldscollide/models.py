@@ -13,6 +13,7 @@ from sqlalchemy.orm import (
     sessionmaker,
     )
 
+DBSession = scoped_session(sessionmaker())
 Base = declarative_base()
 
 class Trip(Base):

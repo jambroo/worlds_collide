@@ -3,22 +3,25 @@ from pyramid.config import Configurator
 from pyramid.response import Response
 import psycopg2
 import os
+from sqlalchemy import create_engine
 
-from worldscollide import models
+from worldscollide.models import DBSession, Trip, Base
 
 def trips(request):
-    # TODO: implement list trips here
-    return Response("...")
+    trips = []
+    for trip in DBSession.query(Trip).all():
+        trips.append({"src": trip.src, "dest": trip.dest})
+    return Response(str(trips))
+
+def add_trip(request):
+    #DBSession.add(Trip(src="bne", dest="syd"))
+    return Response(True)
 
 if __name__ == '__main__':
-    conn_string = "host='"+os.environ['PG_HOST']+"' dbname='worlds_collide' user='"+ \
-        os.environ['PG_USER']+"' password='"+os.environ['PG_USER']+"'"
-
-    conn = psycopg2.connect(conn_string)
-
-    print("Successfully connecting to database")
-
-    cursor = conn.cursor()
+    engine = create_engine('postgresql+psycopg2://'+os.environ['PG_USER']+':'+os.environ['PG_PASS']+'@'+os.environ['PG_HOST']+'/worlds_collide')
+    DBSession.configure(bind=engine, autocommit=True)
+    Base.metadata.bind = engine
+    Base.metadata.create_all(engine)
 
     with Configurator() as config:
         config.add_route('trips', '/')
