@@ -37,8 +37,6 @@ const visibilityFilter = (state = SHOW_ALL, action) => {
   }
 }
 
-
-
 const api = (state = API_PYRAMID, action) => {
   switch (action.type) {
     case SELECT_API:

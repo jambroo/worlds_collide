@@ -18,10 +18,15 @@ export const ApiAlternatives = {
   API_PYRAMID: 'API_PYRAMID',
   API_OTHER: 'API_OTHER'
 }
+export const ApiAlternativesPorts = {
+  API_PYRAMID: 6543,
+  API_OTHER: 1234
+}
 
 export function addTrip(src, dest) {
   return (dispatch, getState) => {
-    return saveTrip(src, dest).then(payload => {
+    let state = getState();
+    return saveTrip(ApiAlternativesPorts[state.api], src, dest).then(payload => {
       if (payload.result === 0) {
         dispatch(addTripSuccess(payload.trip));
       } else {
@@ -50,8 +55,9 @@ export function addTripFail() {
 
 
 export function loadTrips() {
-  return function(dispatch) {
-    return getAllTrips().then(trips => {
+  return function(dispatch, getState) {
+    let state = getState();
+    return getAllTrips(ApiAlternativesPorts[state.api]).then(trips => {
       dispatch(loadTripsSuccess(trips));
     }).catch(error => {
       throw(error);

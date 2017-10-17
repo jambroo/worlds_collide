@@ -1,12 +1,12 @@
-export const getAllTrips = () => {
-  return fetch('http://localhost:6543/').then(response => {
+export const getAllTrips = (port) => {
+  return fetch('http://localhost:'+port+'/').then(response => {
     return response.json();
   }).catch(error => {
     return error;
   });
 }
 
-export const saveTrip = (src, dest) => {
+export const saveTrip = (port, src, dest) => {
   let data = {
     method: "POST",
     headers: {
@@ -16,7 +16,7 @@ export const saveTrip = (src, dest) => {
     body: JSON.stringify({src, dest})
   };
 
-  return fetch('http://localhost:6543/add', data).then(response => {
+  return fetch('http://localhost:'+port+'/add', data).then(response => {
     return response.json();
   }).catch(error => {
     return error;
