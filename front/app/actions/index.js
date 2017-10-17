@@ -13,6 +13,11 @@ export const ADD_TRIP_FAIL = 'ADD_TRIP_FAIL'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 export const LOAD_TRIPS = 'LOAD_TRIPS'
 
+export const SELECT_API = 'SELECT_API'
+export const ApiAlternatives = {
+  API_PYRAMID: 'API_PYRAMID',
+  API_OTHER: 'API_OTHER'
+}
 
 export function addTrip(src, dest) {
   return (dispatch, getState) => {
@@ -58,5 +63,12 @@ export function loadTripsSuccess(trips) {
   return {
     type: LOAD_TRIPS,
     trips
+  };
+}
+
+export function changeApi(api) {
+  return {
+    type: SELECT_API,
+    api
   };
 }

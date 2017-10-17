@@ -10,7 +10,7 @@ services:
      - POSTGRES_USER=${PG_USER}
      - POSTGRES_PASSWORD=${PG_PASS}
      - POSTGRES_DB=worlds_collide
-  web:
+  pyramid:
     build: ./pyramid/
     volumes:
       - ./pyramid/:/usr/src/app
@@ -30,4 +30,4 @@ services:
     volumes:
      - ./front/:/app
     depends_on:
-     - web
+     - pyramid
