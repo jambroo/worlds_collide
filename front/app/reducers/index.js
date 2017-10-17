@@ -17,7 +17,7 @@ const trips = (state = [], action) => {
         return [
           ...state,
           {
-            uid: action.trip.uid,
+            id: action.trip.id,
             src: action.trip.src,
             dest: action.trip.dest
           }

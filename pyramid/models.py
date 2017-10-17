@@ -18,13 +18,13 @@ Base = declarative_base()
 
 class Trip(Base):
     __tablename__ = 'trips'
-    uid = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     src = Column(String(100))
     dest = Column(String(100))
 
     def to_dict(self):
         return {
-            "uid": self.uid,
+            "id": self.id,
             "src": self.src,
             "dest": self.dest
         }

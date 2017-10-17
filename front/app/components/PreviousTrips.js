@@ -12,7 +12,7 @@ const PreviousTrips = ({ trips }) => (
     <ul className="PreviousTrips">
       {trips.length === 0 && <i>No trips recorded.</i>}
       {trips.length && trips.map(trip => (
-        <li key={trip.uid}>
+        <li key={trip.id}>
           <Location>{trip.src}</Location>
           <i className="material-icons Arrow">chevron_right</i>
           <Location>{trip.dest}</Location>
@@ -25,7 +25,7 @@ const PreviousTrips = ({ trips }) => (
 PreviousTrips.propTypes = {
   trips: PropTypes.arrayOf(
     PropTypes.shape({
-      uid: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
       src: PropTypes.string.isRequired,
       dest: PropTypes.string.isRequired
     }).isRequired
