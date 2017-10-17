@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { VisibilityFilters, ADD_TRIP, SET_VISIBILITY_FILTER, LOAD_TRIPS } from '../actions/'
+import { VisibilityFilters, ADD_TRIP, SET_VISIBILITY_FILTER, LOAD_TRIPS, ADD_TRIP_SUCCESS, ADD_TRIP_FAIL } from '../actions/'
 const { SHOW_ALL } = VisibilityFilters
 
 const trips = (state = [], action) => {
@@ -15,6 +15,13 @@ const trips = (state = [], action) => {
       ]
     case LOAD_TRIPS:
       return action.trips
+    case ADD_TRIP_FAIL:
+      return [
+        ...state,
+        {
+          error: 1
+        }
+      ]
     default:
       return state
   }
@@ -29,9 +36,23 @@ const visibilityFilter = (state = SHOW_ALL, action) => {
   }
 }
 
+const errorMessage = (state = null, action) => {
+  const { type, error } = action
+
+  // if (type === ActionTypes.RESET_ERROR_MESSAGE) {
+  //   return null
+  // } else
+  if (error) {
+    return error
+  }
+
+  return state
+}
+
 const worldsCollideApp = combineReducers({
   visibilityFilter,
-  trips
+  trips,
+  errorMessage
 })
 
 export default worldsCollideApp
