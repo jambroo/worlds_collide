@@ -1,7 +1,6 @@
 from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
 from pyramid.response import Response
-from pyramid.httpexceptions import HTTPBadRequest
 import psycopg2
 import os
 from sqlalchemy import create_engine
@@ -14,16 +13,22 @@ def trips_list(request):
         trips.append(trip.to_dict())
     return {"trips": trips}
 
+def trips_list_options(request):
+    return {}
+
 def trips_add(request):
     if "src" not in request.json_body.keys() or \
         "dest" not in request.json_body.keys():
-        return HTTPBadRequest("Src and Dest are required input.")
+        return {"result": 1}
 
     trip = Trip(src=request.json_body["src"], dest=request.json_body["dest"])
     result = DBSession.add(trip)
     DBSession.commit()
 
     return {"result": 0, "trip": trip.to_dict()}
+
+def trips_add_options(request):
+    return {}
 
 if __name__ == '__main__':
     engine = create_engine('postgresql+psycopg2://'+os.environ['PG_USER']+':'+os.environ['PG_PASS']+'@'+os.environ['PG_HOST']+'/worlds_collide')
@@ -33,9 +38,13 @@ if __name__ == '__main__':
 
     with Configurator() as config:
         config.add_route('trips_list', '/')
+        config.add_view(trips_list, route_name='trips_list', renderer='json', request_method='GET')
+        config.add_view(trips_list_options, route_name='trips_list', renderer='json', request_method='OPTIONS')
+
         config.add_route('trips_add', '/add')
-        config.add_view(trips_list, route_name='trips_list', renderer='json')
-        config.add_view(trips_add, route_name='trips_add', renderer='json')
+        config.add_view(trips_add, route_name='trips_add', renderer='json', request_method='POST')
+        config.add_view(trips_add_options, route_name='trips_add', renderer='json', request_method='OPTIONS')
+
         app = config.make_wsgi_app()
     server = make_server('0.0.0.0', 6543, app)
     server.serve_forever()
