@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import { VisibilityFilters, ApiAlternatives, ADD_TRIP, SET_VISIBILITY_FILTER, LOAD_TRIPS, ADD_TRIP_SUCCESS, ADD_TRIP_FAIL, SELECT_API } from '../actions/'
 const { SHOW_ALL } = VisibilityFilters
-const { API_PYRAMID, API_OTHER } = ApiAlternatives
+const { ApiNames } = ApiAlternatives
+const { API_PYRAMID, API_OTHER } = ApiNames
 
 const trips = (state = [], action) => {
   switch (action.type) {
