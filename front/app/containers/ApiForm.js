@@ -8,8 +8,8 @@ const mapStateToProps = state => {
   }
 }
 
-const SelectApiForm = connect(
+const ApiForm = connect(
   mapStateToProps
 )(SelectApi)
 
-export default SelectApiForm
+export default ApiForm

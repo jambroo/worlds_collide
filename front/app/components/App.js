@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import VisibleTripList from '../containers/VisibleTripList'
 import AddDestination from '../containers/AddDestination'
-import SelectApiForm from '../containers/SelectApiForm'
+import ApiForm from '../containers/ApiForm'
 
 import './App.scss'
 
@@ -28,7 +28,7 @@ class App extends Component {
     return (
         <div className="App">
           {this.renderErrorMessage()}
-          <SelectApiForm />
+          <ApiForm />
           <VisibleTripList />
           <AddDestination />
       </div>

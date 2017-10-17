@@ -6,10 +6,12 @@ const { ApiNames, ApiFriendlyNames } = ApiAlternatives
 
 import { changeApi, loadTrips } from '../actions'
 
+import './SelectApi.scss'
+
 const SelectApi = ({ dispatch }) => {
   return (
-    <div>
-        <label>API:</label>
+    <div className="SelectApi">
+        <label>API</label>
         <select onChange={e => {
           e.preventDefault()
           dispatch(changeApi(e.target.value))
