@@ -22,3 +22,12 @@ services:
      - PG_HOST=${PG_HOST}
     depends_on:
      - db
+  front:
+    image: jmfirth/webpack
+    command: webpack-dev-server --hot --inline --progress --host 0.0.0.0
+    ports:
+     - "3001:8080"
+    volumes:
+     - ./front/:/app
+    depends_on:
+     - web
