@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addTrip } from '../actions'
 import City from '../components/City'
+import Heading from '../components/Heading'
 
 const AddDestination = ({ dispatch }) => {
   let from_input, to_input
@@ -19,6 +20,7 @@ const AddDestination = ({ dispatch }) => {
           to_input.value = ''
         }}
       >
+        <Heading>Register New Trip</Heading>
         <City label="From" reference={node => {
           from_input = node
         }} />

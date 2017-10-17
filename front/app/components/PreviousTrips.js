@@ -6,10 +6,11 @@ import Location from './Location'
 
 import './PreviousTrips.scss'
 
-const PreviousTrips = ({ trips }) => (
+const PreviousTrips = ({ trips, loading }) => (
   <div>
     <Heading>Previous Trips</Heading>
-    <ul className="PreviousTrips">
+    {loading && <div className="Loading">Loading...</div>}
+    {!loading && <ul className="PreviousTrips">
       {trips.length === 0 && <i>No trips recorded.</i>}
       {trips.length && trips.map(trip => (
         <li key={trip.id}>
@@ -19,6 +20,7 @@ const PreviousTrips = ({ trips }) => (
         </li>
       ))}
     </ul>
+    }
   </div>
 )
 

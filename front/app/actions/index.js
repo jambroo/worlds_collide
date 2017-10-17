@@ -11,7 +11,10 @@ export const ADD_TRIP_SUCCESS = 'ADD_TRIP_SUCCESS'
 export const ADD_TRIP_FAIL = 'ADD_TRIP_FAIL'
 
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const LOADING_TRIPS = 'LOADING_TRIPS'
 export const LOAD_TRIPS = 'LOAD_TRIPS'
+export const SHOW_LOADING = 'SHOW_LOADING'
+
 
 export const SELECT_API = 'SELECT_API'
 export const ApiAlternatives = {
@@ -62,13 +65,22 @@ export function addTripFail() {
 
 export function loadTrips() {
   return function(dispatch, getState) {
+    dispatch(loadingTrips(true));
     let state = getState();
     return getAllTrips(ApiAlternatives.ApiPorts[state.api]).then(trips => {
       dispatch(loadTripsSuccess(trips));
+      dispatch(loadingTrips(false));
     }).catch(error => {
       throw(error);
     });
   }
+}
+
+export function loadingTrips(status) {
+  return {
+    type: LOADING_TRIPS,
+    loading: status
+  };
 }
 
 export function loadTripsSuccess(trips) {

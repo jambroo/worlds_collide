@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { VisibilityFilters, ApiAlternatives, ADD_TRIP, SET_VISIBILITY_FILTER, LOAD_TRIPS, ADD_TRIP_SUCCESS, ADD_TRIP_FAIL, SELECT_API } from '../actions/'
+import { VisibilityFilters, ApiAlternatives, ADD_TRIP, SET_VISIBILITY_FILTER, LOADING_TRIPS, LOAD_TRIPS, ADD_TRIP_SUCCESS, ADD_TRIP_FAIL, SELECT_API, SHOW_LOADING } from '../actions/'
 const { SHOW_ALL } = VisibilityFilters
 const { ApiNames } = ApiAlternatives
 const { API_PYRAMID, API_OTHER } = ApiNames
@@ -24,6 +24,15 @@ const trips = (state = [], action) => {
             dest: action.trip.dest
           }
         ]
+    default:
+      return state
+  }
+}
+
+const loading = (state = SHOW_LOADING, action) => {
+  switch (action.type) {
+    case LOADING_TRIPS:
+      return action.loading
     default:
       return state
   }
@@ -61,7 +70,8 @@ const worldsCollideApp = combineReducers({
   visibilityFilter,
   trips,
   api,
-  errorMessage
+  errorMessage,
+  loading
 })
 
 export default worldsCollideApp
