@@ -11,10 +11,7 @@ def trips_list(request):
     trips = []
     for trip in DBSession.query(Trip).all():
         trips.append(trip.to_dict())
-    return {"trips": trips}
-
-def trips_list_options(request):
-    return {}
+    return trips
 
 def trips_add(request):
     if "src" not in request.json_body.keys() or \
@@ -27,9 +24,6 @@ def trips_add(request):
 
     return {"result": 0, "trip": trip.to_dict()}
 
-def trips_add_options(request):
-    return {}
-
 if __name__ == '__main__':
     engine = create_engine('postgresql+psycopg2://'+os.environ['PG_USER']+':'+os.environ['PG_PASS']+'@'+os.environ['PG_HOST']+'/worlds_collide')
     DBSession.configure(bind=engine)
@@ -37,13 +31,15 @@ if __name__ == '__main__':
     Base.metadata.create_all(engine)
 
     with Configurator() as config:
+        config.include('cors')
+
+        config.add_cors_preflight_handler()
+
         config.add_route('trips_list', '/')
         config.add_view(trips_list, route_name='trips_list', renderer='json', request_method='GET')
-        config.add_view(trips_list_options, route_name='trips_list', renderer='json', request_method='OPTIONS')
 
         config.add_route('trips_add', '/add')
         config.add_view(trips_add, route_name='trips_add', renderer='json', request_method='POST')
-        config.add_view(trips_add_options, route_name='trips_add', renderer='json', request_method='OPTIONS')
 
         app = config.make_wsgi_app()
     server = make_server('0.0.0.0', 6543, app)
