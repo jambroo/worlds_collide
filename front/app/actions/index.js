@@ -16,10 +16,9 @@ export const LOAD_TRIPS = 'LOAD_TRIPS'
 
 export function addTrip(src, dest) {
   return (dispatch, getState) => {
-    return saveTrip(src, dest).then(result => {
-      if (result.response === 0) {
-        console.log("success")
-        dispatch(addTripSuccess(result.trip));
+    return saveTrip(src, dest).then(payload => {
+      if (payload.result === 0) {
+        dispatch(addTripSuccess(payload.trip));
       } else {
         dispatch(addTripFail());
       }

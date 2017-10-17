@@ -4,15 +4,6 @@ const { SHOW_ALL } = VisibilityFilters
 
 const trips = (state = [], action) => {
   switch (action.type) {
-    case ADD_TRIP:
-      return [
-        ...state,
-        {
-          id: action.id,
-          src: action.src,
-          dest: action.dest
-        }
-      ]
     case LOAD_TRIPS:
       return action.trips
     case ADD_TRIP_FAIL:
@@ -22,6 +13,15 @@ const trips = (state = [], action) => {
           error: 1
         }
       ]
+    case ADD_TRIP_SUCCESS:
+        return [
+          ...state,
+          {
+            uid: action.trip.uid,
+            src: action.trip.src,
+            dest: action.trip.dest
+          }
+        ]
     default:
       return state
   }
@@ -39,9 +39,6 @@ const visibilityFilter = (state = SHOW_ALL, action) => {
 const errorMessage = (state = null, action) => {
   const { type, error } = action
 
-  // if (type === ActionTypes.RESET_ERROR_MESSAGE) {
-  //   return null
-  // } else
   if (error) {
     return error
   }
