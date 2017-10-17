@@ -12,7 +12,7 @@ module.exports = {
         'babel-polyfill',
         'webpack-dev-server/client?http://localhost:3001',
         'webpack/hot/only-dev-server',
-        path.join(__dirname, 'app/index.jsx')
+        path.join(__dirname, 'app/index.js')
     ],
     output: {
         path: path.join(__dirname, '/dist/'),
@@ -39,7 +39,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
             },

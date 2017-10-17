@@ -18,9 +18,8 @@
     "webpack": "^3.6.0"
   },
   "scripts": {
-    "babel_bk": "babel --presets es2015 index.js -o build/index.bundle.js",
     "babel": "babel index.jsx -o build/index.bundle.js",
-    "start": "http-server"
+    "start": "nodejs run.js"
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
