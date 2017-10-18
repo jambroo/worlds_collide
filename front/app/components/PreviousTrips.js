@@ -6,13 +6,14 @@ import Location from './Location'
 
 import './PreviousTrips.scss'
 
-const PreviousTrips = ({ trips, loading }) => (
+const PreviousTrips = ({ errorMessage, trips, loading }) => (
   <div>
     <Heading>Previous Trips</Heading>
-    {loading && <div className="Loading">Loading...</div>}
-    {!loading && <ul className="PreviousTrips">
-      {trips.length === 0 && <i>No trips recorded.</i>}
-      {trips.length && trips.map(trip => (
+    {errorMessage}
+    {!errorMessage && loading && <div className="Loading">Loading...</div>}
+    {!errorMessage && !loading && trips.length === 0 && <div className="NoTripsMessage">No trips recorded.</div>}
+    {!errorMessage && !loading && trips.length !== 0 && <ul className="PreviousTrips">
+      {trips.map(trip => (
         <li key={trip.id}>
           <Location>{trip.src}</Location>
           <i className="material-icons Arrow">chevron_right</i>

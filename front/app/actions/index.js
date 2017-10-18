@@ -14,6 +14,7 @@ export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 export const LOADING_TRIPS = 'LOADING_TRIPS'
 export const LOAD_TRIPS = 'LOAD_TRIPS'
 export const SHOW_LOADING = 'SHOW_LOADING'
+export const LOAD_TRIPS_FAIL_MESSAGE = "An error has occurred while loading trips from API."
 
 
 export const SELECT_API = 'SELECT_API'
@@ -68,10 +69,11 @@ export function loadTrips() {
     dispatch(loadingTrips(true));
     let state = getState();
     return getAllTrips(ApiAlternatives.ApiPorts[state.api]).then(trips => {
-      dispatch(loadTripsSuccess(trips));
+      dispatch(loadTripsResponse(trips, null));
       dispatch(loadingTrips(false));
     }).catch(error => {
-      throw(error);
+      dispatch(loadTripsResponse([], error));
+      dispatch(loadingTrips(false));
     });
   }
 }
@@ -83,10 +85,13 @@ export function loadingTrips(status) {
   };
 }
 
-export function loadTripsSuccess(trips) {
+export function loadTripsResponse(trips, error) {
+  // atatus logging could be added here for error.
+
   return {
     type: LOAD_TRIPS,
-    trips
+    error: (error) ? LOAD_TRIPS_FAIL_MESSAGE : null,
+    trips: trips
   };
 }
 

@@ -33,6 +33,8 @@ const loading = (state = SHOW_LOADING, action) => {
   switch (action.type) {
     case LOADING_TRIPS:
       return action.loading
+    case LOAD_TRIPS:
+      return false
     default:
       return state
   }
@@ -57,13 +59,12 @@ const api = (state = API_PYRAMID, action) => {
 }
 
 const errorMessage = (state = null, action) => {
-  const { type, error } = action
-
-  if (error) {
-    return error
+  switch (action.type) {
+    case LOAD_TRIPS:
+      return action.error
+    default:
+      return state
   }
-
-  return state
 }
 
 const worldsCollideApp = combineReducers({

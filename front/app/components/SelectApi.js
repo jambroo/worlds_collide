@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { VisibilityFilters, ApiAlternatives, ADD_TRIP, SET_VISIBILITY_FILTER, LOAD_TRIPS, ADD_TRIP_SUCCESS, ADD_TRIP_FAIL, SELECT_API } from '../actions/'
+import { ApiAlternatives } from '../actions/'
 const { ApiNames, ApiFriendlyNames } = ApiAlternatives
 
 import { changeApi, loadTrips } from '../actions'

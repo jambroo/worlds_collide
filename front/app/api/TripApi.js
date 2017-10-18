@@ -2,7 +2,7 @@ export const getAllTrips = (port) => {
   return fetch('http://localhost:'+port+'/').then(response => {
     return response.json();
   }).catch(error => {
-    return error;
+    throw(error)
   });
 }
 
@@ -19,6 +19,6 @@ export const saveTrip = (port, src, dest) => {
   return fetch('http://localhost:'+port+'/add', data).then(response => {
     return response.json();
   }).catch(error => {
-    return error;
+    throw(error);
   });
 }
