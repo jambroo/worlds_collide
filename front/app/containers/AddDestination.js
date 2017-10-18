@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { addTrip } from '../actions'
 import City from '../components/City'
 import Heading from '../components/Heading'
+import Error from '../components/Error'
 
-const AddDestination = ({ dispatch }) => {
+const AddDestination = ({ dispatch, errorMessage }) => {
   let from_input, to_input
 
   return (
@@ -21,6 +22,7 @@ const AddDestination = ({ dispatch }) => {
         }}
       >
         <Heading>Register New Trip</Heading>
+        {errorMessage && <Error>{errorMessage}</Error>}
         <City label="From" reference={node => {
           from_input = node
         }} />
@@ -35,4 +37,10 @@ const AddDestination = ({ dispatch }) => {
   )
 }
 
-export default connect()(AddDestination)
+const mapStateToProps = state => {
+  return {
+    errorMessage: state.errorMessage && state.errorMessage.add
+  }
+}
+
+export default connect(mapStateToProps)(AddDestination)

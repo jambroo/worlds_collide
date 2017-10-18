@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 
 import Heading from './Heading'
 import Location from './Location'
+import Error from './Error'
 
 import './PreviousTrips.scss'
 
 const PreviousTrips = ({ errorMessage, trips, loading }) => (
   <div>
     <Heading>Previous Trips</Heading>
-    {errorMessage}
+    {errorMessage && <Error>{errorMessage}</Error>}
     {!errorMessage && loading && <div className="Loading">Loading...</div>}
     {!errorMessage && !loading && trips.length === 0 && <div className="NoTripsMessage">No trips recorded.</div>}
     {!errorMessage && !loading && trips.length !== 0 && <ul className="PreviousTrips">

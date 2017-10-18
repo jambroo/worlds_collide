@@ -11,7 +11,7 @@ const getVisibleTrips = (trips, filter) => {
 
 const mapStateToProps = state => {
   return {
-    errorMessage: state.errorMessage,
+    errorMessage: state.errorMessage && state.errorMessage.load,
     trips: getVisibleTrips(state.trips, state.visibilityFilter),
     loading: state.loading
   }

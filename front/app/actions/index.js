@@ -9,13 +9,13 @@ export const VisibilityFilters = {
 export const ADD_TRIP = 'ADD_TRIP'
 export const ADD_TRIP_SUCCESS = 'ADD_TRIP_SUCCESS'
 export const ADD_TRIP_FAIL = 'ADD_TRIP_FAIL'
+export const ADD_TRIP_FAIL_MESSAGE = 'An error has occurred while saving the trip.'
 
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 export const LOADING_TRIPS = 'LOADING_TRIPS'
 export const LOAD_TRIPS = 'LOAD_TRIPS'
 export const SHOW_LOADING = 'SHOW_LOADING'
-export const LOAD_TRIPS_FAIL_MESSAGE = "An error has occurred while loading trips from API."
-
+export const LOAD_TRIPS_FAIL_MESSAGE = 'An error has occurred while loading previously saved trips.'
 
 export const SELECT_API = 'SELECT_API'
 export const ApiAlternatives = {
@@ -48,7 +48,6 @@ export function addTrip(src, dest) {
   }
 }
 
-
 export function addTripSuccess(trip) {
   return {
     type: ADD_TRIP_SUCCESS,
@@ -56,13 +55,12 @@ export function addTripSuccess(trip) {
   };
 }
 
-
 export function addTripFail() {
   return {
-    type: ADD_TRIP_FAIL
+    type: ADD_TRIP_FAIL,
+    error: ADD_TRIP_FAIL_MESSAGE
   };
 }
-
 
 export function loadTrips() {
   return function(dispatch, getState) {

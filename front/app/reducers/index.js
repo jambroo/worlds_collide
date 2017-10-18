@@ -8,13 +8,6 @@ const trips = (state = [], action) => {
   switch (action.type) {
     case LOAD_TRIPS:
       return action.trips
-    case ADD_TRIP_FAIL:
-      return [
-        ...state,
-        {
-          error: 1
-        }
-      ]
     case ADD_TRIP_SUCCESS:
         return [
           ...state,
@@ -61,7 +54,13 @@ const api = (state = API_PYRAMID, action) => {
 const errorMessage = (state = null, action) => {
   switch (action.type) {
     case LOAD_TRIPS:
-      return action.error
+      return {
+        load: action.error
+      }
+    case ADD_TRIP_FAIL:
+      return {
+        add: action.error
+      }
     default:
       return state
   }
