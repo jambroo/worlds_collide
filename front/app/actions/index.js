@@ -43,7 +43,7 @@ export function addTrip(src, dest) {
         dispatch(addTripFail());
       }
     }).catch(error => {
-      throw(error);
+      dispatch(addTripFail());
     });
   }
 }

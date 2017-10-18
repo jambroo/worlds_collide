@@ -16,7 +16,7 @@ export const saveTrip = (port, src, dest) => {
     body: JSON.stringify({src, dest})
   };
 
-  return fetch('http://localhost:'+port+'/adzd', data).then(response => {
+  return fetch('http://localhost:'+port+'/add', data).then(response => {
     return response.json();
   }).catch(error => {
     throw(error);
