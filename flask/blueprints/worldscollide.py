@@ -5,4 +5,8 @@ bp = Blueprint('worldscollide', __name__)
 
 @bp.route('/')
 def show_entries():
-    return jsonify({"ok": "1"})
+    return jsonify([])
+
+@bp.route('/add', methods=['POST'])
+def add():
+    return jsonify({"result": 0, "trip": {"id": 0, "src": "SRC", "dest": "DEST"}})

@@ -1,7 +1,7 @@
 from os import environ
 from flask import Flask, g
 from blueprints.worldscollide import bp
-
+from flask_cors import CORS
 
 def create_app(config=None):
     app = Flask('flaskr')
@@ -21,4 +21,5 @@ def create_app(config=None):
 
 
 app = create_app()
+CORS(app)
 app.run(host = '0.0.0.0')
