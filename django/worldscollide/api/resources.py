@@ -5,5 +5,5 @@ from tastypie.authorization import Authorization
 class TripResource(ModelResource):
     class Meta:
         queryset = Trip.objects.all()
-        resource_name = 'trip'
+        resource_name = 'trips'
         authorization = Authorization()

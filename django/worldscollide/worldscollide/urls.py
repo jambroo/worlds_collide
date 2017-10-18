@@ -19,6 +19,5 @@ from api.resources import TripResource
 
 trip_resource = TripResource()
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(trip_resource.urls)),
+    url(r'', include(trip_resource.urls)),
 ]

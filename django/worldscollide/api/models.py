@@ -5,4 +5,4 @@ class Trip(models.Model):
     dest = models.CharField(max_length=100)
 
 def __str__(self):
-    return "sup"
+    return "Trip from %s to %s." % (self.src, self.dest)
