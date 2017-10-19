@@ -20,19 +20,19 @@ export const LOAD_TRIPS_FAIL_MESSAGE = 'An error has occurred while loading prev
 export const SELECT_API = 'SELECT_API'
 export const ApiAlternatives = {
   ApiNames: {
+    API_DJANGO: 'API_DJANGO',
     API_PYRAMID: 'API_PYRAMID',
     API_FLASK: 'API_FLASK',
-    API_DJANGO: 'API_DJANGO'
   },
   ApiFriendlyNames: {
+    API_DJANGO: 'Django',
     API_PYRAMID: 'Pyramid',
-    API_FLASK: 'Flask',
-    API_DJANGO: 'Django'
+    API_FLASK: 'Flask'
   },
   ApiPorts: {
-    API_PYRAMID: 6543,
-    API_FLASK: 5000,
-    API_DJANGO: 3004
+    API_DJANGO: 3001,
+    API_PYRAMID: 3002,
+    API_FLASK: 3003
   }
 }
 

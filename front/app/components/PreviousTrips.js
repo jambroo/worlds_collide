@@ -33,7 +33,7 @@ PreviousTrips.propTypes = {
       src: PropTypes.string.isRequired,
       dest: PropTypes.string.isRequired
     }).isRequired
-  ).isRequired
+  )
 }
 
 export default PreviousTrips

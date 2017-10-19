@@ -4,7 +4,7 @@ const { SHOW_ALL } = VisibilityFilters
 const { ApiNames } = ApiAlternatives
 const { API_PYRAMID, API_FLASK } = ApiNames
 
-const trips = (state = {trips:[]}, action) => {
+const trips = (state = null, action) => {
   switch (action.type) {
     case LOAD_TRIPS:
       return action.trips.trips
