@@ -10,12 +10,27 @@ services:
      - POSTGRES_USER=${PG_USER}
      - POSTGRES_PASSWORD=${PG_PASS}
      - POSTGRES_DB=worlds_collide
+  django:
+    build: ./django/
+    command: python worldscollide/manage.py runserver 0.0.0.0:3001
+    volumes:
+      - ./django/:/usr/src/app
+    ports:
+      - "3001:3001"
+    environment:
+     - PG_USER=${PG_USER}
+     - PG_PASS=${PG_PASS}
+     - PG_HOST=${PG_HOST}
+     - DJANGO_SECRET=${DJANGO_SECRET}
+    depends_on:
+     - db
   pyramid:
     build: ./pyramid/
+    command: python -u main.py
     volumes:
       - ./pyramid/:/usr/src/app
     ports:
-      - "6543:6543"
+      - "3002:6543"
     environment:
      - PG_USER=${PG_USER}
      - PG_PASS=${PG_PASS}
@@ -28,7 +43,7 @@ services:
     volumes:
       - ./flask/:/usr/src/app
     ports:
-      - "5000:5000"
+      - "3003:5000"
     environment:
      - PG_USER=${PG_USER}
      - PG_PASS=${PG_PASS}
@@ -40,7 +55,7 @@ services:
     image: jmfirth/webpack
     command: webpack-dev-server --hot --inline --progress --host 0.0.0.0
     ports:
-     - "3001:8080"
+     - "3000:8080"
     volumes:
      - ./front/:/app
     depends_on:
