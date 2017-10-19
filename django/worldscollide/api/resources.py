@@ -7,3 +7,5 @@ class TripResource(ModelResource):
         queryset = Trip.objects.all()
         resource_name = 'trips'
         authorization = Authorization()
+        max_limit = None
+        collection_name = 'trips'
