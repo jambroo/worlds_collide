@@ -6,24 +6,24 @@ from blueprints.helpers import get_db
 
 bp = Blueprint('worldscollide', __name__)
 
-@bp.route('/')
+@bp.route('/trips/')
 def show_entries():
     dbsession = get_db(Base)
     trips = []
     for trip in dbsession.query(Trip).all():
         trips.append(trip.to_dict())
-    return jsonify(trips)
+    return jsonify({ "trips": trips })
 
-@bp.route('/add', methods=['POST'])
+@bp.route('/trips/', methods=['POST'])
 def add():
     input = request.get_json()
     if "src" not in input.keys() or \
         "dest" not in input.keys():
-        return jsonify({"result": 1})
+        return abort(400)
 
     dbsession = get_db(Base)
     trip = Trip(src=input["src"], dest=input["dest"])
     dbsession.add(trip)
     dbsession.commit()
 
-    return jsonify({"result": 0, "trip": trip.to_dict()})
+    return jsonify(trip.to_dict())
