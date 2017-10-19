@@ -22,6 +22,20 @@ services:
      - PG_HOST=${PG_HOST}
     depends_on:
      - db
+  flask:
+    build: ./flask/
+    command: python -u worldscollide.py
+    volumes:
+      - ./flask/:/usr/src/app
+    ports:
+      - "5000:5000"
+    environment:
+     - PG_USER=${PG_USER}
+     - PG_PASS=${PG_PASS}
+     - PG_HOST=${PG_HOST}
+     - FLASK_SECRET=${FLASK_SECRET}
+    depends_on:
+     - db
   front:
     image: jmfirth/webpack
     command: webpack-dev-server --hot --inline --progress --host 0.0.0.0

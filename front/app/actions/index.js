@@ -21,15 +21,15 @@ export const SELECT_API = 'SELECT_API'
 export const ApiAlternatives = {
   ApiNames: {
     API_PYRAMID: 'API_PYRAMID',
-    API_OTHER: 'API_OTHER'
+    API_FLASK: 'API_FLASK'
   },
   ApiFriendlyNames: {
     API_PYRAMID: 'Pyramid',
-    API_OTHER: 'Other'
+    API_FLASK: 'Flask'
   },
   ApiPorts: {
     API_PYRAMID: 6543,
-    API_OTHER: 1234
+    API_FLASK: 5000
   }
 }
 
