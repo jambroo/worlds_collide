@@ -3,6 +3,7 @@ django-admin==1.0.10
 django-cors-headers==2.1.0
 django-excel-response2==2.0.6
 django-tastypie==0.14.0
+psycopg2==2.7.3.1
 python-dateutil==2.6.1
 python-mimeparse==1.6.0
 pytz==2017.2
