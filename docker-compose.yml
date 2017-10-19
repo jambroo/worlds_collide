@@ -36,6 +36,20 @@ services:
      - FLASK_SECRET=${FLASK_SECRET}
     depends_on:
      - db
+  django:
+    build: ./django/
+    command: python worldscollide/manage.py runserver 0.0.0.0:3004
+    volumes:
+      - ./django/:/usr/src/app
+    ports:
+      - "3004:3004"
+    environment:
+     - PG_USER=${PG_USER}
+     - PG_PASS=${PG_PASS}
+     - PG_HOST=${PG_HOST}
+     - DJANGO_SECRET=${DJANGO_SECRET}
+    depends_on:
+     - db
   front:
     image: jmfirth/webpack
     command: webpack-dev-server --hot --inline --progress --host 0.0.0.0
