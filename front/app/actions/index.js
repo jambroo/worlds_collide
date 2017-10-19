@@ -21,15 +21,18 @@ export const SELECT_API = 'SELECT_API'
 export const ApiAlternatives = {
   ApiNames: {
     API_PYRAMID: 'API_PYRAMID',
-    API_FLASK: 'API_FLASK'
+    API_FLASK: 'API_FLASK',
+    API_DJANGO: 'API_DJANGO'
   },
   ApiFriendlyNames: {
     API_PYRAMID: 'Pyramid',
-    API_FLASK: 'Flask'
+    API_FLASK: 'Flask',
+    API_DJANGO: 'Django'
   },
   ApiPorts: {
     API_PYRAMID: 6543,
-    API_FLASK: 5000
+    API_FLASK: 5000,
+    API_DJANGO: 3004
   }
 }
 
@@ -37,11 +40,7 @@ export function addTrip(src, dest) {
   return (dispatch, getState) => {
     let state = getState();
     return saveTrip(ApiAlternatives.ApiPorts[state.api], src, dest).then(payload => {
-      if (payload.result === 0) {
-        dispatch(addTripSuccess(payload.trip));
-      } else {
-        dispatch(addTripFail());
-      }
+      dispatch(addTripSuccess(payload));
     }).catch(error => {
       dispatch(addTripFail());
     });

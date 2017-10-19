@@ -4,10 +4,10 @@ const { SHOW_ALL } = VisibilityFilters
 const { ApiNames } = ApiAlternatives
 const { API_PYRAMID, API_FLASK } = ApiNames
 
-const trips = (state = [], action) => {
+const trips = (state = {trips:[]}, action) => {
   switch (action.type) {
     case LOAD_TRIPS:
-      return action.trips
+      return action.trips.trips
     case ADD_TRIP_SUCCESS:
         return [
           ...state,

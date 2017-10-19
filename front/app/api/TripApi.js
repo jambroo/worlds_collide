@@ -1,5 +1,5 @@
 export const getAllTrips = (port) => {
-  return fetch('http://localhost:'+port+'/').then(response => {
+  return fetch('http://localhost:'+port+'/trips/').then(response => {
     return response.json();
   }).catch(error => {
     throw(error)
@@ -16,7 +16,7 @@ export const saveTrip = (port, src, dest) => {
     body: JSON.stringify({src, dest})
   };
 
-  return fetch('http://localhost:'+port+'/add', data).then(response => {
+  return fetch('http://localhost:'+port+'/trips/', data).then(response => {
     return response.json();
   }).catch(error => {
     throw(error);
