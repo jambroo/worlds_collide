@@ -1,5 +1,6 @@
 Django==1.11.6
 django-admin==1.0.10
+django-cors-headers==2.1.0
 django-excel-response2==2.0.6
 django-tastypie==0.14.0
 python-dateutil==2.6.1
