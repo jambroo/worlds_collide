@@ -12,7 +12,12 @@ def show_entries():
     trips = []
     for trip in dbsession.query(Trip).all():
         trips.append(trip.to_dict())
-    return jsonify({ "trips": trips })
+    payload = {
+        "data": {
+            "trips": trips
+        }
+    }
+    return jsonify(payload)
 
 @bp.route('/trips/', methods=['POST'])
 def add():
@@ -26,4 +31,8 @@ def add():
     dbsession.add(trip)
     dbsession.commit()
 
-    return jsonify(trip.to_dict())
+    payload = {
+        "data": trip.to_dict()
+    }
+
+    return jsonify(payload)

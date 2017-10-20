@@ -10,7 +10,14 @@ def trips_list(request):
     trips = []
     for trip in DBSession.query(Trip).all():
         trips.append(trip.to_dict())
-    return {"trips": trips}
+
+    payload = {
+        "data": {
+            "trips": trips
+        }
+    }
+
+    return payload
 
 def trips_add(request):
     if "src" not in request.json_body.keys() or \
@@ -21,7 +28,11 @@ def trips_add(request):
     DBSession.add(trip)
     DBSession.commit()
 
-    return trip.to_dict()
+    payload = {
+        "data": trip.to_dict()
+    }
+
+    return payload
 
 if __name__ == '__main__':
     engine = create_engine('postgresql+psycopg2://'+os.environ['PG_USER']+':'+os.environ['PG_PASS']+'@'+os.environ['PG_HOST']+'/worlds_collide')
