@@ -48,7 +48,32 @@ class WorldsCollideHandler(APIHandler):
         return {"trips": [
                 {
                     "id": 1,
-                    "src": 2,
+                    "src": "C",
                     "dest": "D"
                 }
             ]}
+
+
+    @schema.validate(
+       input_schema={
+            "type": "object",
+            "properties": {
+                "src": {"type": "string"},
+                "dest": {"type": "string"}
+            },
+           "required": [
+               "src",
+               "dest"
+           ]
+        },
+        input_example={
+            "src": "A",
+            "dest": "B",
+        }
+    )
+    def post(self):
+        self.body["src"]
+        # self.body["dest"]
+        return {
+            "message": "was posted."
+        }
