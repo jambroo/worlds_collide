@@ -7,14 +7,14 @@ const { API_PYRAMID, API_FLASK } = ApiNames
 const trips = (state = null, action) => {
   switch (action.type) {
     case LOAD_TRIPS:
-      return action.trips.trips
+      return action.trips.data.trips
     case ADD_TRIP_SUCCESS:
         return [
           ...state,
           {
-            id: action.trip.id,
-            src: action.trip.src,
-            dest: action.trip.dest
+            id: action.trip.data.id,
+            src: action.trip.data.src,
+            dest: action.trip.data.dest
           }
         ]
     default:

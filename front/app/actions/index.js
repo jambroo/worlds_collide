@@ -23,16 +23,19 @@ export const ApiAlternatives = {
     API_DJANGO: 'API_DJANGO',
     API_PYRAMID: 'API_PYRAMID',
     API_FLASK: 'API_FLASK',
+    API_TORNADO: 'API_TORNADO'
   },
   ApiFriendlyNames: {
     API_DJANGO: 'Django',
     API_PYRAMID: 'Pyramid',
-    API_FLASK: 'Flask'
+    API_FLASK: 'Flask',
+    API_TORNADO: 'Tornado'
   },
   ApiPorts: {
     API_DJANGO: 3001,
     API_PYRAMID: 3002,
-    API_FLASK: 3003
+    API_FLASK: 3003,
+    API_TORNADO: 3004
   }
 }
 
