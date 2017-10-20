@@ -1,9 +1,7 @@
-import json
 import tornado.ioloop
 from tornado_json.routes import get_routes, get_module_routes
 from tornado_json.application import Application
-
-PORT = 3004
+import os
 
 if __name__ == "__main__":
   from worldscollide import api, db
@@ -15,5 +13,5 @@ if __name__ == "__main__":
                       "debug": True
                     },
                     db_conn=db)
-  app.listen(PORT)
+  app.listen(os.environ["TORNADO_PORT"])
   tornado.ioloop.IOLoop.current().start()

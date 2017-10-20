@@ -1,14 +1,21 @@
-from tornado import gen
-
 from tornado_json.requesthandlers import APIHandler
 from tornado_json import schema
-from tornado_json.gen import coroutine
 
 from pony.orm import db_session, select, commit
+
 from worldscollide.db import Trip as TripEntity
-import json
 
 class WorldsCollideHandler(APIHandler):
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with, Content-Type")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
+    def options(self):
+        # no body
+        self.set_status(200)
+        self.finish()
+
     @schema.validate(
         output_schema={
           "type": "object",
