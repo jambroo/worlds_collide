@@ -1,25 +1,19 @@
 import json
 import tornado.ioloop
-from tornado_json.routes import get_routes
+from tornado_json.routes import get_routes, get_module_routes
 from tornado_json.application import Application
-
 
 PORT = 3004
 
 if __name__ == "__main__":
-  import worldscollide
+  from worldscollide import api, db
 
-  routes = get_routes(worldscollide)
+  custom_routes = get_module_routes("worldscollide.api", [("/trips/?", api.WorldsCollideHandler)])
 
-  print("Routes\n======\n\n" + json.dumps(
-      [(url, repr(rh)) for url, rh in routes],
-      indent=2)
-  )
-
-  app = Application(routes=routes,
+  app = Application(routes=custom_routes,
                     settings={
                       "debug": True
                     },
-                    db_conn=worldscollide.db)
+                    db_conn=db)
   app.listen(PORT)
   tornado.ioloop.IOLoop.current().start()
