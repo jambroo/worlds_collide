@@ -4,6 +4,9 @@ from tornado_json.requesthandlers import APIHandler
 from tornado_json import schema
 from tornado_json.gen import coroutine
 
+from pony.orm import db_session, select, commit
+from worldscollide.db import Trip as TripEntity
+import json
 
 class WorldsCollideHandler(APIHandler):
     @schema.validate(
@@ -45,13 +48,12 @@ class WorldsCollideHandler(APIHandler):
         }
     )
     def get(self):
-        return {"trips": [
-                {
-                    "id": 1,
-                    "src": "C",
-                    "dest": "D"
-                }
-            ]}
+        trips = []
+        with db_session:
+            for trip in TripEntity.select():
+                trips.append(trip.to_dict())
+
+        return {"trips": trips}
 
 
     @schema.validate(
@@ -72,8 +74,7 @@ class WorldsCollideHandler(APIHandler):
         }
     )
     def post(self):
-        self.body["src"]
-        # self.body["dest"]
-        return {
-            "message": "was posted."
-        }
+        with db_session:
+            trip = TripEntity(src=self.body["src"], dest=self.body["dest"])
+
+        return trip.to_dict()

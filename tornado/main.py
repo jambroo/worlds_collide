@@ -16,6 +16,10 @@ if __name__ == "__main__":
       indent=2)
   )
 
-  app = Application(routes=routes, settings={"debug": True})
+  app = Application(routes=routes,
+                    settings={
+                      "debug": True
+                    },
+                    db_conn=worldscollide.db)
   app.listen(PORT)
   tornado.ioloop.IOLoop.current().start()
